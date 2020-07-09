@@ -34,7 +34,7 @@ libncurses5:i386 \
 libstdc++6:i386
 
 RUN mkdir -p ~/.ssh
-RUN echo -e "Host *\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+RUN printf "Host *\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
 
 RUN rm -rf /var/lib/apt/lists/*
 
