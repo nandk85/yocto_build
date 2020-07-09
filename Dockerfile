@@ -33,9 +33,21 @@ RUN dpkg --add-architecture i386 && apt update && apt-get -y install libc6:i386 
 libncurses5:i386 \
 libstdc++6:i386
 
-RUN mkdir -p ~/.ssh
-RUN printf "Host *\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+# Create a non-root user that will perform the actual build
+RUN id build 2>/dev/null || useradd --uid 1000 --create-home build
+RUN echo "build ALL=(ALL) NOPASSWD: ALL" | tee -a /etc/sudoers
 
+# Disable Host Key verification.
+RUN mkdir -p /home/build/.ssh
+RUN echo -e "Host *\n\tStrictHostKeyChecking no\n" > /home/build/.ssh/config
+RUN chown -R build:build /home/build/.ssh
+
+# delete all the apt list files since they're big and get stale quickly
 RUN rm -rf /var/lib/apt/lists/*
+
+# overwrite this with 'CMD []' in a dependent Dockerfile
+USER build
+ENV USER build
+WORKDIR /home/build
 
 CMD ["/bin/bash"]
