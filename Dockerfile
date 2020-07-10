@@ -39,7 +39,7 @@ RUN echo "build ALL=(ALL) NOPASSWD: ALL" | tee -a /etc/sudoers
 
 # Disable Host Key verification.
 RUN mkdir -p /home/build/.ssh
-RUN echo -e "Host *\n\tStrictHostKeyChecking no\n" > /home/build/.ssh/config
+RUN printf "Host *\n\tStrictHostKeyChecking no\n" > /home/build/.ssh/config
 RUN chown -R build:build /home/build/.ssh
 
 # delete all the apt list files since they're big and get stale quickly
