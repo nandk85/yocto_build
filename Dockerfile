@@ -22,7 +22,7 @@ libglu1-mesa-dev libncurses-dev libpcre3-dev libsdl1.2-dev libsqlite3-dev libssl
 libtool locales lynx-cur make meld mercurial minicom openjdk-8-jre putty \
 python-argparse python-dev python-dulwich python-pexpect python-pysqlite2 \
 python-svn repo rpm ruby sed subversion texi2html texinfo tofrodos transfig \
-unzip vim wget xmlto xsltproc xutils-dev zlib1g-dev sudo
+unzip vim wget xmlto xsltproc xutils-dev zlib1g-dev rsync 
 
 RUN locale-gen en_US.UTF-8 && update-locale LANG=en_US.UTF-8
 
